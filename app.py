@@ -5,9 +5,6 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect
-# datetime object containing current date and time
-
-
 
 app = Flask(__name__)
 
