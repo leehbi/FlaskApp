@@ -3,6 +3,7 @@ Optional stuff to get set up on WSL2
 Configure Maria DB on WSL2
 
 sudo apt-get update
+sudo apt-get upgrde
 sudo apt-get install -y mariadb-server 
 sudo apt-get install -y libmariadb-dev
 sudo service mysql start
@@ -12,11 +13,14 @@ sudo mysql_secure_installation
 
 sudo mysql -u root 
 
-MariaDB>RANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
-MariaDB> FLUSH PRIVILEGES;
-MariaDB> exit;
-sudo /etc/init.d/mysql restart
+--Create admin account
+MariaDB>CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password here';
+MariaDB>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+MariaDB>FLUSH PRIVILEGES;
+MariaDB>EXIT;
+sudo service mysql restart
 
+sudo mysql -u admin -p
 
 -- Paste SQL below into MariaDB cli 
 -- Install schema for myflaskapp
