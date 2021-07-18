@@ -1,0 +1,49 @@
+Optional stuff to get set up on WSL2
+
+Configure Maria DB on WSL2
+
+sudo apt-get update
+sudo apt-get install -y mariadb-server 
+sudo apt-get install -y libmariadb-dev
+sudo service mysql start
+or if that doesn't work :
+sudo /etc/init.d/mysql start
+sudo mysql_secure_installation
+
+sudo mysql -u root 
+
+MariaDB>RANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+MariaDB> FLUSH PRIVILEGES;
+MariaDB> exit;
+sudo /etc/init.d/mysql restart
+
+
+
+-- Install schema for myflaskapp
+
+DROP DATABASE IF EXISTS myflaskapp;
+CREATE DATABASE myflaskapp;
+USE myflaskapp;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `articles`
+-- Paste SQL below into MariaDB cli 
+
+CREATE TABLE `articles` (
+  `title` varchar(30) NOT NULL,
+  `body` varchar(200) NOT NULL,
+  `author` varchar(17) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+
+CREATE TABLE `users` (
+  `name` varchar(30) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `username` varchar(17) NOT NULL,
+  `password` varchar(110) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+COMMIT;
