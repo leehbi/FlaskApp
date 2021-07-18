@@ -1,13 +1,16 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
-#from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 from datetime import datetime
-
+from flask_wtf.csrf import CSRFProtect
 # datetime object containing current date and time
+
+
+
 app = Flask(__name__)
+
 
 # Config MySQL
 app.config['MYSQL_HOST'] = 'localhost'
@@ -280,4 +283,6 @@ def delete_article(id):
 
 if __name__ == '__main__':
     app.secret_key='secret123'
+    csrf = CSRFProtect()
+    csrf.init_app(app)
     app.run(debug=True)
