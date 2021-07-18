@@ -4,7 +4,9 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+from datetime import datetime
 
+# datetime object containing current date and time
 app = Flask(__name__)
 
 # Config MySQL
@@ -201,7 +203,7 @@ def add_article():
         cur = mysql.connection.cursor()
 
         # Execute
-        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)",(title, body, session['username']))
+        cur.execute("INSERT INTO articles(create_date, title, body, author) VALUES(%s, %s, %s, %s)",(datetime.now(),title, body, session['username']))
 
         # Commit to DB
         mysql.connection.commit()

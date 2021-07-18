@@ -18,7 +18,7 @@ MariaDB> exit;
 sudo /etc/init.d/mysql restart
 
 
-
+-- Paste SQL below into MariaDB cli 
 -- Install schema for myflaskapp
 
 DROP DATABASE IF EXISTS myflaskapp;
@@ -28,12 +28,12 @@ USE myflaskapp;
 
 --
 -- Table structure for table `articles`
--- Paste SQL below into MariaDB cli 
 
 CREATE TABLE `articles` (
   `title` varchar(30) NOT NULL,
   `body` varchar(200) NOT NULL,
   `author` varchar(17) NOT NULL,
+  `create_date` datetime NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY
 );
 
